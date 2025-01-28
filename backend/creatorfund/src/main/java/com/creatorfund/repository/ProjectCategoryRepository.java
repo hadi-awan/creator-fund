@@ -11,7 +11,7 @@ import java.util.UUID;
 @Repository
 public interface ProjectCategoryRepository extends JpaRepository<ProjectCategory, UUID> {
 
-    List<ProjectCategory> findByParentId(UUID parentId);
+    List<ProjectCategory> findByParentCategoryId(UUID parentId);
 
     Optional<ProjectCategory> findByNameIgnoreCase(String name);
 }

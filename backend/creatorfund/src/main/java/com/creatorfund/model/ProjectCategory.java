@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -22,7 +24,10 @@ public class ProjectCategory {
 
     @ManyToOne
     @JoinColumn(name = "parent_category_id")
-    private ProjectCategory parent;
+    private ProjectCategory parentCategory;
+
+    @OneToMany(mappedBy = "parentCategory")
+    private List<ProjectCategory> subcategories = new ArrayList<>();
 
     @Column(name = "created_at")
     private ZonedDateTime createdAt;
