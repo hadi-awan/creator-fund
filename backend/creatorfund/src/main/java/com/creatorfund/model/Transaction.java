@@ -16,14 +16,14 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "pledge_id", nullable = false)
     private Pledge pledge;
 
     @Column(nullable = false)
     private BigDecimal amount;
 
-    private String currency;
+    private String currency = "USD";
 
     @Column(nullable = false)
     private String status;

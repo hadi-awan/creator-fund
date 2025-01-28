@@ -10,13 +10,13 @@ import org.springframework.test.context.ActiveProfiles;
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
 @ActiveProfiles("test")
-public class ProjectRepositoryTest {
-
+class ProjectRepositoryTest {
     @Autowired
     private ProjectRepository projectRepository;
 
@@ -26,16 +26,26 @@ public class ProjectRepositoryTest {
     @Autowired
     private ProjectCategoryRepository categoryRepository;
 
-    private Project createTestProject(String title, ProjectStatus status) {
-        User creator = new User();
-        creator.setEmail("creator@test.com");
-        creator.setFullName("Creator");
-        creator.setPasswordHash("hashedPassword");
-        userRepository.save(creator);
+    private static final AtomicInteger counter = new AtomicInteger(0);
 
+    private User createUser() {
+        String uniqueEmail = "creator" + counter.incrementAndGet() + "@test.com";
+        User user = new User();
+        user.setEmail(uniqueEmail);
+        user.setFullName("Test Creator " + counter.get());
+        user.setPasswordHash("hashedPassword");
+        return userRepository.save(user);
+    }
+
+    private ProjectCategory createCategory() {
         ProjectCategory category = new ProjectCategory();
-        category.setName("Test Category");
-        categoryRepository.save(category);
+        category.setName("Test Category " + counter.get());
+        return categoryRepository.save(category);
+    }
+
+    private Project createTestProject(String title, ProjectStatus status) {
+        User creator = createUser();
+        ProjectCategory category = createCategory();
 
         Project project = new Project();
         project.setCreator(creator);
@@ -46,6 +56,7 @@ public class ProjectRepositoryTest {
         project.setStartDate(ZonedDateTime.now());
         project.setEndDate(ZonedDateTime.now().plusDays(30));
         project.setStatus(status);
+        project.setCurrentAmount(BigDecimal.ZERO);
         return projectRepository.save(project);
     }
 

@@ -3,6 +3,7 @@ package com.creatorfund.repository;
 import com.creatorfund.model.Message;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -20,8 +21,8 @@ public interface MessageRepository extends JpaRepository<Message, UUID> {
     List<Message> findByProjectId(UUID projectId);
 
     @Query("SELECT m FROM Message m WHERE " +
-            "(m.sender = ?1 AND m.recipient = ?2) OR " +
-            "(m.sender = ?2 AND m.recipient = ?1) " +
+            "(m.sender.id = :user1Id AND m.recipient.id = :user2Id) OR " +
+            "(m.sender.id = :user2Id AND m.recipient.id = :user1Id) " +
             "ORDER BY m.createdAt DESC")
-    List<Message> findConversation(UUID user1Id, UUID user2Id);
+    List<Message> findConversation(@Param("user1Id") UUID user1Id, @Param("user2Id") UUID user2Id);
 }
