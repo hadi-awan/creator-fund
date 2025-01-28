@@ -12,7 +12,7 @@ import java.util.ArrayList;
 @Entity
 @Table(name = "comments")
 @SuppressWarnings("all")
-public class comments {
+public class Comments {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -28,10 +28,10 @@ public class comments {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_comment_id")
-    private comments parentComment;
+    private Comments parentComment;
 
     @OneToMany(mappedBy = "parentComment", cascade = CascadeType.ALL)
-    private List<comments> replies = new ArrayList<>();
+    private List<Comments> replies = new ArrayList<>();
 
     @Column(nullable = false)
     private String content;

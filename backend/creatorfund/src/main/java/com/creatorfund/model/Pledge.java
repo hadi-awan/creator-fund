@@ -1,7 +1,7 @@
 package com.creatorfund.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
