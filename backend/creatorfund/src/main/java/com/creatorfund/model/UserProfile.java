@@ -49,30 +49,4 @@ public class UserProfile {
     protected void onUpdate() {
         updatedAt = ZonedDateTime.now();
     }
-
-    // Helper methods for managing the relationships
-    public void addSkill(String skill) {
-        UserSkill userSkill = new UserSkill();
-        userSkill.setSkill(skill);
-        userSkill.setUserProfile(this);
-        skills.add(userSkill);
-    }
-
-    public void removeSkill(UserSkill skill) {
-        skills.remove(skill);
-        skill.setUserProfile(null);
-    }
-
-    public void addInterest(String interest) {
-        UserInterest userInterest = new UserInterest();
-        userInterest.setInterest(interest);
-        userInterest.setUserProfile(this);
-        interests.add(userInterest);
-    }
-
-    public void removeInterest(UserInterest interest) {
-        interests.remove(interest);
-        interest.setUserProfile(null);
-    }
-
 }

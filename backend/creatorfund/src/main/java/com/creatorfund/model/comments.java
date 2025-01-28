@@ -28,10 +28,10 @@ public class comments {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_comment_id")
-    private Comment parentComment;
+    private comments parentComment;
 
     @OneToMany(mappedBy = "parentComment", cascade = CascadeType.ALL)
-    private List<Comment> replies = new ArrayList<>();
+    private List<comments> replies = new ArrayList<>();
 
     @Column(nullable = false)
     private String content;
