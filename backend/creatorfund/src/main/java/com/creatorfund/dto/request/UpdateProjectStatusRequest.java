@@ -4,7 +4,7 @@ import jakarta.validation.constraints.*;
 import lombok.Data;
 
 @Data
-public class UpdateProjectUpdateStatusRequest {
+public class UpdateProjectStatusRequest {
     @NotNull(message = "Status is required")
     private String status;
 
