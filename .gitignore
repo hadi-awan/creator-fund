@@ -1,0 +1,19 @@
+# Backend
+backend/target/
+backend/.mvn/
+backend/*.log
+backend/src/main/resources/application-local.properties
+
+# Frontend
+frontend/node_modules/
+frontend/build/
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.test.local
+frontend/.env.production.local
+frontend/npm-debug.log*
+
+# IDE
+.idea/
+*.iml
+.vscode/
