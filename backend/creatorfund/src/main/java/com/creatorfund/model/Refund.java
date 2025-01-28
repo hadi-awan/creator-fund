@@ -9,41 +9,38 @@ import java.util.UUID;
 
 @Data
 @Entity
-@Table(name = "pledges")
-public class Pledge {
+@Table(name = "refunds")
+public class Refund {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
     @ManyToOne
-    @JoinColumn(name = "backer_id", nullable = false)
-    private User backer;
-
-    @ManyToOne
-    @JoinColumn(name = "project_id", nullable = false)
-    private Project project;
-
-    @ManyToOne
-    @JoinColumn(name = "reward_tier_id")
-    private RewardTier rewardTier;
+    @JoinColumn(name = "transaction_id", nullable = false)
+    private Transaction transaction;
 
     @Column(nullable = false)
     private BigDecimal amount;
 
-    @Enumerated(EnumType.STRING)
-    private PledgeStatus status;
+    private String reason;
 
-    @Column(name = "transaction_id")
-    private String transactionId;
+    @Column(nullable = false)
+    private String status;
 
     @Column(name = "created_at")
     private ZonedDateTime createdAt;
 
-    private boolean anonymous;
+    @Column(name = "processed_at")
+    private ZonedDateTime processedAt;
 
     @PrePersist
     protected void onCreate() {
         createdAt = ZonedDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        processedAt = ZonedDateTime.now();
     }
 }
