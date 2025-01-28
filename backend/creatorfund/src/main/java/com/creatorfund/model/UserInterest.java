@@ -1,0 +1,23 @@
+package com.creatorfund.model;
+
+import jakarta.persistence.*;
+import lombok.Data;
+
+import java.util.UUID;
+
+@Data
+@Entity
+@Table(name = "user_interests")
+public class UserInterest {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
+
+    @ManyToOne
+    @JoinColumn(name = "user_profile_id", nullable = false)
+    private UserProfile userProfile;
+
+    @Column(nullable = false)
+    private String interest;
+}
