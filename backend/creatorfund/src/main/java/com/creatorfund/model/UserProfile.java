@@ -8,6 +8,7 @@ import org.hibernate.type.SqlTypes;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @Data
@@ -23,11 +24,12 @@ public class UserProfile {
     private User user;
 
     private String location;
+
     private String website;
 
-    @Column(name = "social_links")
     @JdbcTypeCode(SqlTypes.JSON)
-    private String socialLinks;
+    @Column(columnDefinition = "jsonb")
+    private Map<String, String> socialLinks;
 
     @OneToMany(mappedBy = "userProfile", cascade = CascadeType.ALL)
     private List<UserSkill> skills = new ArrayList<>();

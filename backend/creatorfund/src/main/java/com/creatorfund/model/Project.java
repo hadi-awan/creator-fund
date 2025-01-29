@@ -5,6 +5,7 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -52,6 +53,15 @@ public class Project {
     @Column(name = "risk_assessment")
     private String riskAssessment;
 
+    @OneToMany(mappedBy = "project")
+    private List<Pledge> pledges = new ArrayList<>();
+
+    @OneToMany(mappedBy = "project")
+    private List<ProjectTeam> projectTeam = new ArrayList<>();
+
+    @OneToMany(mappedBy = "project")
+    private List<Comments> comments = new ArrayList<>();
+
     @Column(name = "created_at")
     private ZonedDateTime createdAt;
 
@@ -63,4 +73,15 @@ public class Project {
 
     @OneToMany(mappedBy = "project")
     private List<RewardTier> rewardTiers;
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = ZonedDateTime.now();
+        updatedAt = ZonedDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updatedAt = ZonedDateTime.now();
+    }
 }

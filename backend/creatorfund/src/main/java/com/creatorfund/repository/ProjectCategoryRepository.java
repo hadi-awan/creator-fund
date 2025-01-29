@@ -14,4 +14,10 @@ public interface ProjectCategoryRepository extends JpaRepository<ProjectCategory
     List<ProjectCategory> findByParentCategoryId(UUID parentId);
 
     Optional<ProjectCategory> findByNameIgnoreCase(String name);
+
+    List<ProjectCategory> findByParentCategoryIdIsNull();
+
+    List<ProjectCategory> findByNameContainingIgnoreCase(String name);
+
+    boolean existsByNameIgnoreCase(String name);
 }

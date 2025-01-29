@@ -2,18 +2,15 @@ package com.creatorfund.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-
 import java.time.ZonedDateTime;
-import java.util.UUID;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 @Data
 @Entity
 @Table(name = "comments")
-@SuppressWarnings("all")
 public class Comments {
-
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
@@ -26,11 +23,11 @@ public class Comments {
     @JoinColumn(name = "project_id", nullable = false)
     private Project project;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "parent_comment_id")
     private Comments parentComment;
 
-    @OneToMany(mappedBy = "parentComment", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "parentComment")
     private List<Comments> replies = new ArrayList<>();
 
     @Column(nullable = false)
@@ -43,6 +40,7 @@ public class Comments {
     private ZonedDateTime updatedAt;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private CommentStatus status = CommentStatus.ACTIVE;
 
     @PrePersist

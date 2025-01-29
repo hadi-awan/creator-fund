@@ -12,7 +12,7 @@ public interface UserMapper {
     UserProfileResponse toProfileResponse(User user);
 
     @Mapping(target = "passwordHash", ignore = true)
-    @Mapping(target = "role", constant = "USER")
+    @Mapping(target = "role", constant = "BACKER")  // Changed from "USER" to "BACKER"
     @Mapping(target = "status", constant = "ACTIVE")
     User toEntity(CreateUserRequest request);
 }

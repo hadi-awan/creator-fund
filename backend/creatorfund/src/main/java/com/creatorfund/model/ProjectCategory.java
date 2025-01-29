@@ -26,8 +26,8 @@ public class ProjectCategory {
     @JoinColumn(name = "parent_category_id")
     private ProjectCategory parentCategory;
 
-    @OneToMany(mappedBy = "parentCategory")
-    private List<ProjectCategory> subcategories = new ArrayList<>();
+    @OneToMany(mappedBy = "category")
+    private List<Project> projects = new ArrayList<>();
 
     @Column(name = "created_at")
     private ZonedDateTime createdAt;

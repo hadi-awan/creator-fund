@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.ZonedDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -40,6 +41,15 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     private UserStatus status;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private UserProfile userProfile;
+
+    @OneToMany(mappedBy = "creator")
+    private List<Project> projects;
+
+    @OneToMany(mappedBy = "backer")
+    private List<Pledge> pledges;
 
     @PrePersist
     protected void onCreate() {

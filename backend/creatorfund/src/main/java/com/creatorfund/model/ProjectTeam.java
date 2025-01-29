@@ -25,7 +25,7 @@ public class ProjectTeam {
     @Column(nullable = false)
     private TeamRole role;
 
-    @Column(columnDefinition = "json")
+    @Column(columnDefinition = "jsonb")
     private String permissions;
 
     @Column(name = "joined_at", nullable = false)

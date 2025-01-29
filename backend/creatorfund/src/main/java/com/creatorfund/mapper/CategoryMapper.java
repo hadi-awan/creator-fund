@@ -7,6 +7,14 @@ import org.mapstruct.*;
 
 @Mapper(componentModel = "spring")
 public interface CategoryMapper {
-    CategoryResponse toResponse(ProjectCategory category);
+
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "parentCategory", ignore = true)
+    @Mapping(target = "projects", ignore = true)
+    @Mapping(target = "createdAt", ignore = true)
     ProjectCategory toEntity(CreateProjectCategoryRequest request);
+
+    @Mapping(target = "parentCategoryId", source = "parentCategory.id")
+    @Mapping(target = "subcategories", ignore = true)
+    CategoryResponse toResponse(ProjectCategory category);
 }
