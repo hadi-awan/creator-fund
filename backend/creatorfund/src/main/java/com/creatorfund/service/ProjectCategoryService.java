@@ -4,7 +4,7 @@ import com.creatorfund.dto.request.CreateProjectCategoryRequest;
 import com.creatorfund.dto.response.CategoryResponse;
 import com.creatorfund.exception.BusinessValidationException;
 import com.creatorfund.exception.ResourceNotFoundException;
-import com.creatorfund.mapper.CategoryMapper;
+import com.creatorfund.mapper.ProjectCategoryMapper;
 import com.creatorfund.model.ProjectCategory;
 import com.creatorfund.repository.ProjectCategoryRepository;
 import jakarta.transaction.Transactional;
@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 @Transactional
 public class ProjectCategoryService {
     private final ProjectCategoryRepository categoryRepository;
-    private final CategoryMapper categoryMapper;
+    private final ProjectCategoryMapper projectCategoryMapper;
 
     public CategoryResponse createCategory(CreateProjectCategoryRequest request) {
         validateCategoryName(request.getName());
@@ -31,28 +31,28 @@ public class ProjectCategoryService {
                     .orElseThrow(() -> new ResourceNotFoundException("Parent category not found"));
         }
 
-        ProjectCategory category = categoryMapper.toEntity(request);
+        ProjectCategory category = projectCategoryMapper.toEntity(request);
         category.setParentCategory(parentCategory);
 
         ProjectCategory savedCategory = categoryRepository.save(category);
-        return categoryMapper.toResponse(savedCategory);
+        return projectCategoryMapper.toResponse(savedCategory);
     }
 
     public CategoryResponse getCategory(UUID categoryId) {
         ProjectCategory category = categoryRepository.findById(categoryId)
                 .orElseThrow(() -> new ResourceNotFoundException("Category not found"));
-        return categoryMapper.toResponse(category);
+        return projectCategoryMapper.toResponse(category);
     }
 
     public List<CategoryResponse> getRootCategories() {
         return categoryRepository.findByParentCategoryIdIsNull().stream()
-                .map(categoryMapper::toResponse)
+                .map(projectCategoryMapper::toResponse)
                 .collect(Collectors.toList());
     }
 
     public List<CategoryResponse> getSubcategories(UUID parentId) {
         return categoryRepository.findByParentCategoryId(parentId).stream()
-                .map(categoryMapper::toResponse)
+                .map(projectCategoryMapper::toResponse)
                 .collect(Collectors.toList());
     }
 
@@ -76,7 +76,7 @@ public class ProjectCategoryService {
         category.setParentCategory(parentCategory);
 
         ProjectCategory updatedCategory = categoryRepository.save(category);
-        return categoryMapper.toResponse(updatedCategory);
+        return projectCategoryMapper.toResponse(updatedCategory);
     }
 
     public void deleteCategory(UUID categoryId) {
@@ -99,7 +99,7 @@ public class ProjectCategoryService {
 
     public List<CategoryResponse> searchCategories(String query) {
         return categoryRepository.findByNameContainingIgnoreCase(query).stream()
-                .map(categoryMapper::toResponse)
+                .map(projectCategoryMapper::toResponse)
                 .collect(Collectors.toList());
     }
 

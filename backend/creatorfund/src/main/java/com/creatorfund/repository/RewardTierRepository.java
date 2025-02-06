@@ -15,4 +15,8 @@ public interface RewardTierRepository extends JpaRepository<RewardTier, UUID> {
 
     @Query("SELECT r FROM RewardTier r WHERE r.project.id = ?1 AND (r.currentBackers < r.limitCount OR r.limitCount IS NULL)")
     List<RewardTier> findAvailableByProjectId(UUID projectId);
+
+    @Query("SELECT r FROM RewardTier r WHERE r.project.id = :projectId " +
+            "AND (r.limitCount IS NULL OR r.currentBackers < r.limitCount)")
+    List<RewardTier> findByProjectIdAndCurrentBackersLessThanLimitCount(UUID projectId);
 }

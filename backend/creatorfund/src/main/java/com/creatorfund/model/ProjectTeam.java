@@ -2,6 +2,9 @@ package com.creatorfund.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
+
 import java.time.ZonedDateTime;
 import java.util.UUID;
 
@@ -25,7 +28,8 @@ public class ProjectTeam {
     @Column(nullable = false)
     private TeamRole role;
 
-    @Column(columnDefinition = "jsonb")
+    @JdbcTypeCode(SqlTypes.JSON)
+    @Column(columnDefinition = "json")  // Changed from jsonb to json for H2 compatibility
     private String permissions;
 
     @Column(name = "joined_at", nullable = false)

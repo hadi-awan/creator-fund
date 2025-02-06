@@ -6,7 +6,7 @@ import com.creatorfund.model.ProjectCategory;
 import org.mapstruct.*;
 
 @Mapper(componentModel = "spring")
-public interface CategoryMapper {
+public interface ProjectCategoryMapper {
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "parentCategory", ignore = true)

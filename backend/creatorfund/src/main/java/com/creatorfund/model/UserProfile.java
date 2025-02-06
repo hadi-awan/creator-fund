@@ -27,9 +27,9 @@ public class UserProfile {
 
     private String website;
 
+    @Column(name = "social_links")
     @JdbcTypeCode(SqlTypes.JSON)
-    @Column(columnDefinition = "jsonb")
-    private Map<String, String> socialLinks;
+    private String socialLinks;
 
     @OneToMany(mappedBy = "userProfile", cascade = CascadeType.ALL)
     private List<UserSkill> skills = new ArrayList<>();

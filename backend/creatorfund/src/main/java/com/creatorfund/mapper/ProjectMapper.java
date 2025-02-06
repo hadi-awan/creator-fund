@@ -7,7 +7,7 @@ import com.creatorfund.dto.response.ProjectSummaryResponse;
 import com.creatorfund.model.Project;
 import org.mapstruct.*;
 
-@Mapper(componentModel = "spring", uses = {UserMapper.class, CategoryMapper.class})
+@Mapper(componentModel = "spring", uses = {UserMapper.class, ProjectCategoryMapper.class})
 public interface ProjectMapper {
     ProjectSummaryResponse toSummaryResponse(Project project);
 
