@@ -98,7 +98,9 @@ public class CommentService {
         if (!parentComment.getProject().getId().equals(projectId)) {
             throw new BusinessValidationException("Parent comment must belong to the same project");
         }
-        throw new BusinessValidationException("Cannot reply to an inactive comment");
+        if (!parentComment.getStatus().equals(CommentStatus.ACTIVE)) {
+            throw new BusinessValidationException("Cannot reply to an inactive comment");
+        }
     }
 
     private void validateModerator(UUID moderatorId, Project project) {
