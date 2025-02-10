@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
 @ActiveProfiles("test")
-class ProjectRepositoryTest {
+public class ProjectRepositoryTest {
     @Autowired
     private ProjectRepository projectRepository;
 

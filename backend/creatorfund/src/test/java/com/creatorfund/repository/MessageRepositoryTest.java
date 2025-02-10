@@ -13,7 +13,7 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 @DataJpaTest
 @ActiveProfiles("test")
-class MessageRepositoryTest {
+public class MessageRepositoryTest {
     @Autowired
     private MessageRepository messageRepository;
 

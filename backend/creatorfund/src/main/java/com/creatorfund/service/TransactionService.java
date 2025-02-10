@@ -20,7 +20,7 @@ public class TransactionService {
     private final TransactionRepository transactionRepository;
     private final TransactionMapper transactionMapper;
 
-    public void createTransactionForPledge(Pledge pledge) {
+    public TransactionResponse createTransactionForPledge(Pledge pledge) {
         CreateTransactionRequest request = new CreateTransactionRequest();
         request.setPledgeId(pledge.getId());
         request.setAmount(pledge.getAmount());
@@ -31,7 +31,7 @@ public class TransactionService {
         transaction.setPledge(pledge);
 
         Transaction savedTransaction = transactionRepository.save(transaction);
-        transactionMapper.toResponse(savedTransaction);
+        return transactionMapper.toResponse(savedTransaction);
     }
 
     public TransactionResponse getTransaction(UUID transactionId) {
