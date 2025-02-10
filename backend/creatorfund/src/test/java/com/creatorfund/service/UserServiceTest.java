@@ -23,7 +23,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-class UserServiceTest extends BaseServiceTest {
+public class UserServiceTest extends BaseServiceTest {
 
     @Mock
     private UserRepository userRepository;
