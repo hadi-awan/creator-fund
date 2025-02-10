@@ -23,7 +23,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-class NotificationServiceTest extends BaseServiceTest {
+public class NotificationServiceTest extends BaseServiceTest {
 
     @Mock
     private NotificationRepository notificationRepository;

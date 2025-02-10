@@ -24,7 +24,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-class PledgeServiceTest extends BaseServiceTest {
+public class PledgeServiceTest extends BaseServiceTest {
 
     @Mock
     private PledgeRepository pledgeRepository;

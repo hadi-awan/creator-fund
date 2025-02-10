@@ -21,7 +21,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-class ProjectCategoryServiceTest extends BaseServiceTest {
+public class ProjectCategoryServiceTest extends BaseServiceTest {
 
     @Mock
     private ProjectCategoryRepository categoryRepository;
