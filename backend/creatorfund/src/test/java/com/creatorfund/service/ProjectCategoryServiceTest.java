@@ -144,7 +144,7 @@ class ProjectCategoryServiceTest extends BaseServiceTest {
         UUID categoryId = UUID.randomUUID();
         ProjectCategory category = createSampleCategory(null);
         when(categoryRepository.findById(categoryId)).thenReturn(Optional.of(category));
-        when(categoryRepository.findByParentCategoryId(categoryId)).thenReturn(Arrays.asList());
+        when(categoryRepository.findByParentCategoryId(categoryId)).thenReturn(List.of());
 
         // Act
         categoryService.deleteCategory(categoryId);
@@ -161,7 +161,7 @@ class ProjectCategoryServiceTest extends BaseServiceTest {
         ProjectCategory subcategory = createSampleCategory(category);
 
         when(categoryRepository.findById(categoryId)).thenReturn(Optional.of(category));
-        when(categoryRepository.findByParentCategoryId(categoryId)).thenReturn(Arrays.asList(subcategory));
+        when(categoryRepository.findByParentCategoryId(categoryId)).thenReturn(List.of(subcategory));
 
         // Act & Assert
         assertThatThrownBy(() -> categoryService.deleteCategory(categoryId))
