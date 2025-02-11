@@ -8,11 +8,14 @@ import com.creatorfund.model.*;
 import com.creatorfund.repository.UserProfileRepository;
 import com.creatorfund.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -99,5 +102,44 @@ public class UserProfileService {
                     newProfile.setUser(user);
                     return userProfileRepository.save(newProfile);
                 });
+    }
+
+    public List<UserProfileResponse> searchProfiles(String query, String location,
+                                                    List<String> skills, List<String> interests) {
+        Specification<UserProfile> spec = Specification.where(null);
+
+        if (query != null && !query.trim().isEmpty()) {
+            spec = spec.and((root, criteriaQuery, criteriaBuilder) ->
+                    criteriaBuilder.or(
+                            criteriaBuilder.like(criteriaBuilder.lower(root.get("user").get("fullName")),
+                                    "%" + query.toLowerCase() + "%"),
+                            criteriaBuilder.like(criteriaBuilder.lower(root.get("user").get("email")),
+                                    "%" + query.toLowerCase() + "%")
+                    )
+            );
+        }
+
+        if (location != null && !location.trim().isEmpty()) {
+            spec = spec.and((root, criteriaQuery, criteriaBuilder) ->
+                    criteriaBuilder.like(criteriaBuilder.lower(root.get("location")),
+                            "%" + location.toLowerCase() + "%")
+            );
+        }
+
+        if (skills != null && !skills.isEmpty()) {
+            spec = spec.and((root, criteriaQuery, criteriaBuilder) ->
+                    root.join("skills").get("skill").in(skills)
+            );
+        }
+
+        if (interests != null && !interests.isEmpty()) {
+            spec = spec.and((root, criteriaQuery, criteriaBuilder) ->
+                    root.join("interests").get("interest").in(interests)
+            );
+        }
+
+        return userProfileRepository.findAll((Sort) spec).stream()
+                .map(userProfileMapper::toResponse)
+                .collect(Collectors.toList());
     }
 }

@@ -5,13 +5,18 @@ import com.creatorfund.dto.request.CreateUserRequest;
 import com.creatorfund.dto.request.UpdateUserProfileRequest;
 import com.creatorfund.dto.response.UserProfileResponse;
 import com.creatorfund.exception.ResourceNotFoundException;
+import com.creatorfund.mapper.PledgeMapper;
+import com.creatorfund.mapper.ProjectMapper;
 import com.creatorfund.mapper.UserMapper;
 import com.creatorfund.model.User;
 import com.creatorfund.model.UserProfile;
+import com.creatorfund.repository.PledgeRepository;
+import com.creatorfund.repository.ProjectRepository;
 import com.creatorfund.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.ZonedDateTime;
 import java.util.Arrays;
@@ -31,11 +36,26 @@ public class UserServiceTest extends BaseServiceTest {
     @Mock
     private UserMapper userMapper;
 
+    @Mock
+    private ProjectRepository projectRepository;
+
+    @Mock
+    private ProjectMapper projectMapper;
+
+    @Mock
+    private PledgeRepository pledgeRepository;
+
+    @Mock
+    private PledgeMapper pledgeMapper;
+
+    @Mock
+    private PasswordEncoder passwordEncoder;
+
     private UserService userService;
 
     @BeforeEach
     void setUp() {
-        userService = new UserService(userRepository, userMapper);
+        userService = new UserService(userRepository, userMapper, projectRepository, projectMapper, pledgeRepository, pledgeMapper, passwordEncoder);
     }
 
     @Test

@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.2.2</version>
+		<version>3.2.3</version> <!-- Updated to a valid Spring Boot version -->
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
@@ -45,6 +45,7 @@
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
+			<version>42.6.1</version> <!-- Updated to a valid PostgreSQL version -->
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
