@@ -10,10 +10,5 @@ import java.util.List;
 
 @Repository
 public interface TransactionRepository extends JpaRepository<Transaction, UUID> {
-
-    List<Transaction> findByPledgeId(UUID pledgeId);
-
-    List<Transaction> findByStatus(String status);
-
     List<Transaction> findByCreatedAtBetween(ZonedDateTime start, ZonedDateTime end);
 }

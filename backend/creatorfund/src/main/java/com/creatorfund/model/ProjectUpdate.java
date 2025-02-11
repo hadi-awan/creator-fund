@@ -1,3 +1,4 @@
+
 package com.creatorfund.model;
 
 import jakarta.persistence.*;

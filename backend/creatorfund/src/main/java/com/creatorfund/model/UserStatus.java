@@ -1,5 +1,5 @@
 package com.creatorfund.model;
 
 public enum UserStatus {
-    ACTIVE, INACTIVE, SUSPENDED;
+    ACTIVE, INACTIVE, SUSPENDED
 }
