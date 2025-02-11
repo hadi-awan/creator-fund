@@ -33,13 +33,30 @@ public class UserProfileRepositoryTest {
         profile.setLocation("New York");
         profile.setWebsite("https://example.com");
 
-        // Add skills and interests
-        profile.addSkill("Java");
-        profile.addSkill("Spring Boot");
-        profile.addInterest("Technology");
-        profile.addInterest("Innovation");
+        // Add skills
+        UserSkill javaSkill = new UserSkill();
+        javaSkill.setSkill("Java");
+        javaSkill.setUserProfile(profile);
+        profile.getSkills().add(javaSkill);
 
-        UserProfile savedProfile = userProfileRepository.save(profile);
+        UserSkill springSkill = new UserSkill();
+        springSkill.setSkill("Spring Boot");
+        springSkill.setUserProfile(profile);
+        profile.getSkills().add(springSkill);
+
+        // Add interests
+        UserInterest techInterest = new UserInterest();
+        techInterest.setInterest("Technology");
+        techInterest.setUserProfile(profile);
+        profile.getInterests().add(techInterest);
+
+        UserInterest innovationInterest = new UserInterest();
+        innovationInterest.setInterest("Innovation");
+        innovationInterest.setUserProfile(profile);
+        profile.getInterests().add(innovationInterest);
+
+        // Save the profile
+        userProfileRepository.save(profile);
 
         // When
         Optional<UserProfile> foundProfile = userProfileRepository.findByUserId(user.getId());
@@ -63,15 +80,31 @@ public class UserProfileRepositoryTest {
 
         UserProfile profile1 = new UserProfile();
         profile1.setUser(user1);
-        profile1.addSkill("Java");
-        profile1.addSkill("Python");
+
+        UserSkill javaSkill1 = new UserSkill();
+        javaSkill1.setSkill("Java");
+        javaSkill1.setUserProfile(profile1);
+        profile1.getSkills().add(javaSkill1);
         userProfileRepository.save(profile1);
 
         UserProfile profile2 = new UserProfile();
         profile2.setUser(user2);
-        profile2.addSkill("Java");
-        profile2.addSkill("JavaScript");
+
+        UserSkill javaSkill2 = new UserSkill();
+        javaSkill2.setSkill("Java");
+        javaSkill2.setUserProfile(profile2);
+        profile2.getSkills().add(javaSkill2);
         userProfileRepository.save(profile2);
+
+        UserProfile profile3 = new UserProfile();
+        User user3 = createTestUser("user3@test.com");
+        profile3.setUser(user3);
+
+        UserSkill pythonSkill = new UserSkill();
+        pythonSkill.setSkill("Python");
+        pythonSkill.setUserProfile(profile3);
+        profile3.getSkills().add(pythonSkill);
+        userProfileRepository.save(profile3);
 
         // When
         List<UserProfile> javaProfiles = userProfileRepository.findBySkill("Java");

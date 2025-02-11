@@ -13,7 +13,5 @@ public interface PledgeRepository extends JpaRepository<Pledge, UUID> {
 
     List<Pledge> findByProjectId(UUID projectId);
 
-    List<Pledge> findByBackerId(UUID backerId);
-
     List<Pledge> findByProjectIdAndStatus(UUID projectId, PledgeStatus status);
 }

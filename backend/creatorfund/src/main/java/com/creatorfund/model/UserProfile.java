@@ -8,7 +8,6 @@ import org.hibernate.type.SqlTypes;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 @Data
@@ -52,27 +51,5 @@ public class UserProfile {
     @PreUpdate
     protected void onUpdate() {
         updatedAt = ZonedDateTime.now();
-    }
-
-    public void addSkill(String skillName) {
-        UserSkill skill = new UserSkill();
-        skill.setSkill(skillName);
-        skill.setUserProfile(this);
-        skills.add(skill);
-    }
-
-    public void removeSkill(String skillName) {
-        skills.removeIf(skill -> skill.getSkill().equals(skillName));
-    }
-
-    public void addInterest(String interestName) {
-        UserInterest interest = new UserInterest();
-        interest.setInterest(interestName);
-        interest.setUserProfile(this);
-        interests.add(interest);
-    }
-
-    public void removeInterest(String interestName) {
-        interests.removeIf(interest -> interest.getInterest().equals(interestName));
     }
 }

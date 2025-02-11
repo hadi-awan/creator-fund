@@ -5,7 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Repository
@@ -14,8 +13,6 @@ public interface ProjectTeamRepository extends JpaRepository<ProjectTeam, UUID> 
     List<ProjectTeam> findByProjectId(UUID projectId);
 
     List<ProjectTeam> findByUserId(UUID userId);
-
-    Optional<ProjectTeam> findByProjectIdAndUserId(UUID projectId, UUID userId);
 
     boolean existsByProjectIdAndUserId(UUID projectId, UUID userId);
 }

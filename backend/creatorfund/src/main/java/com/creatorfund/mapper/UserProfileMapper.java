@@ -41,7 +41,7 @@ public interface UserProfileMapper {
             return Collections.emptyMap();
         }
         try {
-            return OBJECT_MAPPER.readValue(socialLinks, new TypeReference<Map<String, String>>() {});
+            return OBJECT_MAPPER.readValue(socialLinks, new TypeReference<>() {});
         } catch (JsonProcessingException e) {
             return Collections.emptyMap();
         }

@@ -39,7 +39,7 @@ public class RewardTier {
     private LocalDate estimatedDeliveryDate;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "shipping_tyoe")
+    @Column(name = "shipping_type")
     private ShippingType shippingType;
 
     @Column(name = "created_at")

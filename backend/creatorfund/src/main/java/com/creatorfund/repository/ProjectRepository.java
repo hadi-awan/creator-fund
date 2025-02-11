@@ -14,11 +14,7 @@ import java.util.UUID;
 @Repository
 public interface ProjectRepository extends JpaRepository<Project, UUID> {
 
-    List<Project> findByCreatorId(UUID creatorID);
-
     List<Project> findByStatus(ProjectStatus status);
-
-    Page<Project> findByCategoryId(UUID categoryID, Pageable pageable);
 
     @Query("SELECT p FROM Project p WHERE p.currentAmount >= p.fundingGoal AND p.status = 'ACTIVE'")
     List<Project> findFullyFundedActiveProjects();
